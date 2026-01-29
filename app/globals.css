@@ -1,2 +1,255 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+/* ============================================
+   Tailwind v4 Theme Extension
+   ============================================ */
+@theme {
+  /* Ocean Color Palette */
+  --color-ocean-50: #e6f4f9;
+  --color-ocean-100: #b8e0ff;
+  --color-ocean-200: #7bc8f0;
+  --color-ocean-300: #3eb0e0;
+  --color-ocean-400: #088395;
+  --color-ocean-500: #0a4d68;
+  --color-ocean-600: #083d54;
+  --color-ocean-700: #062d40;
+  --color-ocean-800: #041e2c;
+  --color-ocean-900: #051923;
+
+  /* Accent Colors */
+  --color-coral: #ff6b35;
+  --color-coral-light: #ff8a5c;
+  --color-golden: #ffd93d;
+  --color-golden-light: #ffe566;
+  --color-aqua: #b8e0ff;
+  --color-abyss: #051923;
+
+  /* Custom Animations */
+  --animate-float-up: float-up 10s ease-in-out infinite;
+  --animate-float-up-slow: float-up 15s ease-in-out infinite;
+  --animate-wave: wave 3s ease-in-out infinite;
+  --animate-wave-slow: wave 5s ease-in-out infinite;
+  --animate-glow: glow-pulse 2s ease-in-out infinite;
+  --animate-sway: sway 4s ease-in-out infinite;
+  --animate-bounce-soft: bounce-soft 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Keyframe Animations
+   ============================================ */
+
+/* Bubble floating up animation */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Wave animation for overlays */
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25px) translateY(5px);
+  }
+}
+
+/* Glow pulse for cards */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(8, 131, 149, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(8, 131, 149, 0.6);
+  }
+}
+
+/* Swaying motion for underwater elements */
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-2deg) translateX(-5px);
+  }
+  50% {
+    transform: rotate(2deg) translateX(5px);
+  }
+}
+
+/* Soft bounce for scroll indicator */
+@keyframes bounce-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Shimmer effect for light beams */
+@keyframes shimmer {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Scale in animation */
+@keyframes scale-in {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Fade in up animation */
+@keyframes fade-in-up {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Ocean gradient backgrounds */
+.bg-ocean-gradient {
+  background: linear-gradient(180deg,
+    var(--color-ocean-400) 0%,
+    var(--color-ocean-500) 50%,
+    var(--color-ocean-900) 100%
+  );
+}
+
+.bg-deep-sea {
+  background: linear-gradient(180deg,
+    var(--color-ocean-800) 0%,
+    var(--color-abyss) 100%
+  );
+}
+
+.bg-surface-light {
+  background: linear-gradient(180deg,
+    rgba(184, 224, 255, 0.3) 0%,
+    rgba(8, 131, 149, 0.1) 100%
+  );
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card-dark {
+  background: rgba(5, 25, 35, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(8, 131, 149, 0.3);
+}
+
+/* Light beam effect */
+.light-beam {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(184, 224, 255, 0.2) 50%,
+    transparent 100%
+  );
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* Bubble styles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(184, 224, 255, 0.4) 50%,
+    rgba(8, 131, 149, 0.2)
+  );
+  box-shadow:
+    inset 0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(184, 224, 255, 0.3);
+}
+
+/* Text glow effect */
+.text-glow {
+  text-shadow: 0 0 20px rgba(184, 224, 255, 0.5);
+}
+
+/* Card hover glow */
+.hover-glow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(8, 131, 149, 0.5);
+  transform: translateY(-5px);
+}
+
+/* Underwater text overlay */
+.underwater-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 25, 35, 0.3) 0%,
+    rgba(5, 25, 35, 0.7) 100%
+  );
+}
+
+/* Animate on scroll - initial state */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .bubble,
+  .light-beam {
+    animation: none !important;
+  }
+}

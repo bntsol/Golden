@@ -16,51 +16,55 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "#about", label: "About" },
-    { href: "#travel", label: "Travel" },
-    { href: "#photos", label: "Photos" },
+    { href: "#journey", label: "Journey" },
+    { href: "#work", label: "Work" },
+    { href: "#adventures", label: "Adventures" },
+    { href: "#gallery", label: "Gallery" },
   ];
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm"
+          ? "bg-ocean-900/90 backdrop-blur-md shadow-lg"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* 로고/이름 */}
+          {/* Logo */}
           <a
             href="#"
             className={`text-xl font-semibold transition-colors ${
-              isScrolled ? "text-neutral-800" : "text-white"
+              isScrolled ? "text-aqua" : "text-white"
             }`}
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            My Portfolio
+            <span className="text-glow">Golden</span>
           </a>
 
-          {/* 데스크톱 메뉴 */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-amber-500 ${
-                  isScrolled ? "text-neutral-600" : "text-white/90"
+                className={`text-sm font-medium transition-all duration-300 hover:text-ocean-300 relative group ${
+                  isScrolled ? "text-aqua/80" : "text-white/90"
                 }`}
               >
                 {link.label}
+                {/* Underline effect */}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ocean-300 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
 
-          {/* 모바일 햄버거 버튼 */}
+          {/* Mobile Hamburger Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`md:hidden p-2 transition-colors ${
-              isScrolled ? "text-neutral-800" : "text-white"
+              isScrolled ? "text-aqua" : "text-white"
             }`}
           >
             <svg
@@ -88,16 +92,16 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* 모바일 메뉴 */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-neutral-200">
+          <div className="md:hidden mt-4 pb-4 border-t border-ocean-700/50">
             <div className="flex flex-col gap-4 pt-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-neutral-600 hover:text-amber-500 transition-colors"
+                  className="text-aqua/80 hover:text-ocean-300 transition-colors"
                 >
                   {link.label}
                 </a>

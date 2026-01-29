@@ -4,92 +4,207 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
+import UnderwaterJourney from "@/components/UnderwaterJourney";
 import PhotoGrid from "@/components/PhotoGrid";
 import ImageModal from "@/components/ImageModal";
 import Footer from "@/components/Footer";
 
 // ============================================
-// 여기를 수정하세요! (개인 정보)
+// Golden's Information
 // ============================================
 const myInfo = {
-  name: "비엔티",
-  tagline: "여행을 좋아하는 개발자입니다",
-  email: "hello@example.com",
-  greeting: "안녕하세요!",
-  description:
-    "저는 새로운 곳을 탐험하고 사진으로 기록하는 것을 좋아합니다. 이 사이트는 제가 직접 만든 첫 번째 웹사이트입니다. Next.js와 Tailwind CSS로 만들었습니다.",
+  name: "Golden",
+  tagline: "Diving into Code, One Line at a Time",
+  greeting: "Hey there! I'm Golden.",
+  description: `My journey began in February 2025 when OpenAI Sora brought me to life in "Diving Dog Adventure" - you might remember the prompt that started it all: "Golden retriever with snorkel mask..."
+
+These days, I've traded my underwater adventures for office life. I work as a senior developer, reviewing pull requests with a thoughtful, critical eye (and reading glasses worn over my snorkel mask, of course).
+
+My current prompt? "Golden retriever with snorkel mask reviewing code. Reading glasses on over snorkel mask. Thoughtful critical expression, analyzing code. Red pen marks or comments on screen. Senior developer reviewing pull request."
+
+I'm passionate about AI, and you'll find me coding day and night. Welcome to my world!`,
   highlights: [
-    "여행 사진 촬영",
-    "새로운 음식 탐험",
-    "웹 개발 배우기",
+    "Born from AI (Sora 2025)",
+    "Senior Developer",
+    "Code Reviewer",
+    "AI Enthusiast",
   ],
-  socialLinks: {
-    instagram: "https://instagram.com",
-    github: "https://github.com",
-  },
 };
 
 // ============================================
-// 이미지 설정 (Unsplash 샘플 이미지 사용)
-// 나중에 public 폴더에 본인 사진을 넣고 경로를 바꾸세요
-// 예: "/my-photo.jpg"
+// Image Configuration - Underwater Theme
 // ============================================
 const images = {
-  hero: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80",
-  profile: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80",
-  travel: [
+  // Main hero background - underwater coral reef
+  hero: "/underwater_adventure_01_171625.png",
+
+  // About section - fish school circle (complements circular frame)
+  profile: "/underwater_adventure_02_171728.png",
+
+  // Underwater Journey - 5 adventure scenes
+  underwaterJourney: [
     {
-      src: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80",
-      alt: "일본 교토",
-      caption: "일본 교토의 아름다운 거리",
+      image: "/underwater_adventure_01_171625.png",
+      title: "The Beginning",
+      description: "Where it all started - exploring coral reefs",
     },
     {
-      src: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80",
-      alt: "프랑스 파리",
-      caption: "파리 에펠탑 앞에서",
+      image: "/underwater_adventure_02_171728.png",
+      title: "Making Friends",
+      description: "Surrounded by a school of golden fish",
     },
     {
-      src: "https://images.unsplash.com/photo-1513415277900-a62401e19be4?w=800&q=80",
-      alt: "이탈리아 베니스",
-      caption: "베니스의 운하",
+      image: "/underwater_adventure_03_171831.png",
+      title: "Ocean Companion",
+      description: "Swimming alongside wise sea turtles",
     },
     {
-      src: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800&q=80",
-      alt: "스페인 바르셀로나",
-      caption: "사그라다 파밀리아 성당",
+      image: "/underwater_adventure_04_171934.png",
+      title: "Kelp Forest",
+      description: "Exploring the mysterious underwater forests",
     },
     {
-      src: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80",
-      alt: "그리스 산토리니",
-      caption: "산토리니의 하얀 집들",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=800&q=80",
-      alt: "일본 도쿄",
-      caption: "도쿄의 밤거리",
+      image: "/underwater_adventure_05_172037.png",
+      title: "Discovery",
+      description: "Uncovering secrets of ancient shipwrecks",
     },
   ],
-  photos: [
+
+  // Work section
+  work: [
     {
-      src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
-      alt: "맛있는 음식",
-      caption: "여행 중 만난 맛집",
+      src: "/cam_action_drinking_coffee_204310.png",
+      alt: "Morning Coffee",
+      caption: "Morning fuel before standup",
     },
     {
-      src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
-      alt: "풍경 사진",
-      caption: "아름다운 자연",
+      src: "/07_sleepy_drowsy_02_200319.png",
+      alt: "Sleepy after review",
+      caption: "After a 4-hour code review",
     },
     {
-      src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
-      alt: "산",
-      caption: "겨울 산의 풍경",
+      src: "/new_action_sleepy_drooling_131143.png",
+      alt: "Waiting for CI/CD",
+      caption: "Waiting for CI/CD pipeline",
+    },
+    {
+      src: "/new_zoom_detail_paws_mouse_133107.png",
+      alt: "Paws on Mouse",
+      caption: "Clicking through code reviews",
+    },
+    {
+      src: "/new_zoom_detail_paws_resting_133004.png",
+      alt: "Paws Resting",
+      caption: "Taking a well-deserved break",
+    },
+    {
+      src: "/cam_zoom_full_body_202725.png",
+      alt: "Full Body",
+      caption: "Ready for the daily standup",
+    },
+    {
+      src: "/edit_20260120_130523.png",
+      alt: "Editing Session",
+      caption: "Deep in code editing mode",
+    },
+    {
+      src: "/cam_angle_from_behind_201900.png",
+      alt: "From Behind",
+      caption: "Focused on the screen",
+    },
+    {
+      src: "/cam_action_running_204825.png",
+      alt: "Running",
+      caption: "Racing to meet the deadline",
+    },
+  ],
+
+  // Adventures section
+  adventures: [
+    {
+      src: "/hobby_travel_venice_gondola_224226.png",
+      alt: "Venice Gondola",
+      caption: "Venice code retreat",
+    },
+    {
+      src: "/hobby_travel_machu_picchu_224432.png",
+      alt: "Machu Picchu",
+      caption: "High-altitude debugging",
+    },
+    {
+      src: "/hobby_travel_hot_air_balloon_224639.png",
+      alt: "Hot Air Balloon",
+      caption: "Cloud computing, literally",
+    },
+    {
+      src: "/hobby_outdoor_camping_214022.png",
+      alt: "Camping",
+      caption: "Offline mode activated",
+    },
+    {
+      src: "/hobby_outdoor_rock_climbing_214331.png",
+      alt: "Rock Climbing",
+      caption: "Scaling challenges",
+    },
+    {
+      src: "/hobby_outdoor_fishing_214125.png",
+      alt: "Fishing",
+      caption: "Catching bugs",
+    },
+    {
+      src: "/hobby_art_pottery_214950.png",
+      alt: "Pottery",
+      caption: "Shaping user experiences",
+    },
+    {
+      src: "/hobby_music_recording_studio_220434.png",
+      alt: "Recording Studio",
+      caption: "Debugging by ear",
+    },
+    {
+      src: "/hobby_cook_coffee_barista_221156.png",
+      alt: "Barista",
+      caption: "Brewing solutions",
+    },
+  ],
+
+  // Gallery section
+  gallery: [
+    {
+      src: "/new_lens_macro_eye_reflection_130213.png",
+      alt: "Eye Reflection",
+      caption: "Attention to detail",
+    },
+    {
+      src: "/new_lens_macro_paw_pad_130316.png",
+      alt: "Paw Detail",
+      caption: "Hands-on developer",
+    },
+    {
+      src: "/cam_cine_silhouette_210000.png",
+      alt: "Silhouette",
+      caption: "Working in the shadows",
+    },
+    {
+      src: "/dog_time_sunset_golden_195213.png",
+      alt: "Golden Hour",
+      caption: "Golden hour, golden retriever",
+    },
+    {
+      src: "/new_zoom_closeup_face_smile_132221.png",
+      alt: "Happy Face",
+      caption: "Merged to main successfully",
+    },
+    {
+      src: "/edit_20260120_133934.png",
+      alt: "Creative Edit",
+      caption: "A different perspective",
     },
   ],
 };
 
 // ============================================
-// 메인 페이지 컴포넌트
+// Main Page Component
 // ============================================
 export default function Home() {
   const [modalImage, setModalImage] = useState<{
@@ -102,12 +217,20 @@ export default function Home() {
     setModalImage(photo);
   };
 
+  const handleJourneyItemClick = (item: { image: string; title: string; description: string }) => {
+    setModalImage({
+      src: item.image,
+      alt: item.title,
+      caption: item.description,
+    });
+  };
+
   const handleCloseModal = () => {
     setModalImage(null);
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-ocean-900">
       <Navbar />
 
       <HeroSection
@@ -123,29 +246,61 @@ export default function Home() {
         highlights={myInfo.highlights}
       />
 
-      <PhotoGrid
-        id="travel"
-        title="Travel"
-        subtitle="제가 다녀온 여행지들입니다"
-        photos={images.travel}
-        onPhotoClick={handlePhotoClick}
+      {/* Underwater Journey Section */}
+      <UnderwaterJourney
+        items={images.underwaterJourney}
+        onItemClick={handleJourneyItemClick}
       />
 
-      <div className="bg-white">
+      {/* Work Section */}
+      <div
+        className="relative"
+        style={{
+          background: "linear-gradient(180deg, #ffffff 0%, #e6f4f9 50%, #b8e0ff 100%)",
+        }}
+      >
         <PhotoGrid
-          id="photos"
-          title="Photos"
-          subtitle="일상의 순간들"
-          photos={images.photos}
+          id="work"
+          title="Work Life"
+          subtitle="The daily grind of a developer dog"
+          photos={images.work}
           onPhotoClick={handlePhotoClick}
         />
       </div>
 
-      <Footer
-        name={myInfo.name}
-        email={myInfo.email}
-        socialLinks={myInfo.socialLinks}
-      />
+      {/* Adventures Section */}
+      <div
+        className="relative"
+        style={{
+          background: "linear-gradient(180deg, #e6f4f9 0%, #ffffff 100%)",
+        }}
+      >
+        <PhotoGrid
+          id="adventures"
+          title="Adventures"
+          subtitle="When I'm not coding..."
+          photos={images.adventures}
+          onPhotoClick={handlePhotoClick}
+        />
+      </div>
+
+      {/* Gallery Section */}
+      <div
+        className="relative"
+        style={{
+          background: "linear-gradient(180deg, #ffffff 0%, #041e2c 100%)",
+        }}
+      >
+        <PhotoGrid
+          id="gallery"
+          title="Gallery"
+          subtitle="Different perspectives"
+          photos={images.gallery}
+          onPhotoClick={handlePhotoClick}
+        />
+      </div>
+
+      <Footer name={myInfo.name} />
 
       <ImageModal
         isOpen={modalImage !== null}

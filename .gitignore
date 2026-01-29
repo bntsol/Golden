@@ -57,5 +57,12 @@ _skills/
 *.gif
 *.webp
 
+# Exception: public folder images are allowed
+!public/*.png
+!public/*.jpg
+!public/*.jpeg
+!public/*.gif
+!public/*.webp
+
 # Markdown files
 *.md

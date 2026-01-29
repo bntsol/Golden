@@ -49,8 +49,13 @@ next-env.d.ts
 # Internal/Training files
 _backup/
 _skills/
-CLAUDE.md
-skill_*.md
-step*.md
-font.md
-capture.png
+
+# Image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Markdown files
+*.md

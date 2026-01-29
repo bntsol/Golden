@@ -45,3 +45,12 @@ next-env.d.ts
 
 # Image extraction temp files
 .image-extract/
+
+# Internal/Training files
+_backup/
+_skills/
+CLAUDE.md
+skill_*.md
+step*.md
+font.md
+capture.png
